@@ -14,7 +14,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.mail.Session;
+
 import io.restassured.RestAssured;
+import io.restassured.filter.session.SessionFilter;
 import io.restassured.path.json.JsonPath;
 
 public class JiraApi {
@@ -23,14 +26,19 @@ public class JiraApi {
 
 		//Authorization
 		RestAssured.baseURI = "http://localhost:8080";
+		SessionFilter session = new SessionFilter();
+		String response = 
+				given()
+					.header("Content-Type", "application/json")
+					.body("{ \"username\": \"admin\", \"password\": \"admin\" }")
+					.filter(session)
 
-		String response = given().header("Content-Type", "application/json")
+				.when()
+					.post("/rest/auth/1/session")
 
-				.body("{ \"username\": \"admin\", \"password\": \"admin\" }")
-
-				.when().post("/rest/auth/1/session")
-
-				.then().log().all().extract().response().asString();
+				.then()
+					.log().all()
+					.extract().response().asString();
 
 		JsonPath js = reusablejsonpath.rawtoJson(response);
 		String sid = js.get("session.value");
@@ -41,6 +49,7 @@ public class JiraApi {
 
 				.header("Content-Type", "application/json").header("cookie", sid)
 				.auth().preemptive().basic("admin", "admin")
+				.filter(session) //to capture the session initially created
 //				.body(new String(Files.readAllBytes(Paths.get("C:\\Users\\purna\\Desktop\\SBI\\API_New_Id.json"))))
 				.body("{\r\n"
 						+ "  \"fields\": {\r\n"
@@ -56,11 +65,13 @@ public class JiraApi {
 						+ "  }\r\n"
 						+ "}")
 				
-				.when().post("/rest/api/2/issue")
+				.when()
+					.post("/rest/api/2/issue")
 				
-				.then().log().all()
-				.assertThat().statusCode(201)
-				.extract().response().asString();
+				.then()
+					.log().all()
+					.assertThat().statusCode(201)
+					.extract().response().asString();
 
 		System.out.println("This is " + newresponse + " ======>");
 		JsonPath js1 = reusablejsonpath.rawtoJson(newresponse);
@@ -71,7 +82,8 @@ public class JiraApi {
 		
 		String response2= given()
 			.pathParam("id",issueid)
-			.auth().preemptive().basic("admin", "admin")
+//			.auth().preemptive().basic("admin", "admin")
+			.filter(session) //to capture the session initially created
 			.header("Content-Type", "application/json")
 			.body("{\r\n"
 					+ "    \"body\": \"This is my new comment in Jira through Postman\",\r\n"
@@ -87,18 +99,21 @@ public class JiraApi {
 		JsonPath js2 = reusablejsonpath.rawtoJson(response2);
 		String commentid =js2.get("id");
 		
+		// update cooment
 		given()
-		.pathParam("commentid",commentid)
-		.pathParam("issueid",issueid)
-		.auth().preemptive().basic("admin", "admin")
-		.header("Content-Type", "application/json")
-		.body("{\r\n"
-				+ "    \"body\": \"This is my 2nd comment in Jira through Postman\",\r\n"
-				+ "    \"visibility\": {\r\n"
-				+ "        \"type\": \"role\",\r\n"
-				+ "        \"value\": \"Administrators\"\r\n"
-				+ "    }\r\n"
-				+ "}")
+			.pathParam("commentid",commentid)
+			.pathParam("issueid",issueid)
+//			.auth().preemptive().basic("admin", "admin")
+			.filter(session) //to capture the session initially created
+			.header("Content-Type", "application/json")
+			.body("{\r\n"
+					+ "    \"body\": \"This is my 2nd comment in Jira through Postman\",\r\n"
+					+ "    \"visibility\": {\r\n"
+					+ "        \"type\": \"role\",\r\n"
+					+ "        \"value\": \"Administrators\"\r\n"
+					+ "    }\r\n"
+					+ "}")
+			.filter(session)
 		.when()
 			.put("http://localhost:8080/rest/api/2/issue/{issueid}/comment/{commentid}")
 		
@@ -106,6 +121,28 @@ public class JiraApi {
 		.log().all()
 		.assertThat().statusCode(200);
 		System.out.println("This is sooo good API put over");
+		
+		//delete a request, here before 2 req deleted
+		given()
+//			.auth().preemptive().basic("admin", "admin")
+			.filter(session) //to capture the session initially created
+			.pathParam("issueid", (Integer.parseInt(issueid)-5))
+		
+		.when()
+			.delete("/rest/api/2/issue/{issueid}"); 
+		
+		//add attachment
+		
+		given()
+			.header("X-Atlassian-Token","no-check")
+			.header("Content-Type", "multipart/form-data")
+			.multiPart("file",new File("pppeee.txt"))
+			.filter(session)
+			.pathParam("key", issueid)
+		.when()
+			.post("/rest/api/2/issue/{key}/attachments")
+		.then()
+			.log().all().assertThat().statusCode(200);
 		
 		
 	}

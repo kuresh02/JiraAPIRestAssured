@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-12T17:51:56 IST" name="Default suite" finished-at="2024-05-12T17:51:59 IST" duration-ms="2979">
+  <suite started-at="2024-05-12T21:41:50 IST" name="Default suite" finished-at="2024-05-12T21:41:56 IST" duration-ms="5256">
     <groups>
     </groups>
-    <test started-at="2024-05-12T17:51:56 IST" name="Default test" finished-at="2024-05-12T17:51:59 IST" duration-ms="2979">
+    <test started-at="2024-05-12T21:41:50 IST" name="Default test" finished-at="2024-05-12T21:41:56 IST" duration-ms="5256">
       <class name="com.testingapi.demo.working.JiraApi">
-        <test-method signature="jiraApilogin()[pri:0, instance:com.testingapi.demo.working.JiraApi@3c77d488]" started-at="2024-05-12T17:51:56 IST" name="jiraApilogin" finished-at="2024-05-12T17:51:59 IST" duration-ms="2917" status="PASS">
+        <test-method signature="jiraApilogin()[pri:0, instance:com.testingapi.demo.working.JiraApi@5ab956d7]" started-at="2024-05-12T21:41:50 IST" name="jiraApilogin" finished-at="2024-05-12T21:41:56 IST" duration-ms="5199" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jiraApilogin -->
