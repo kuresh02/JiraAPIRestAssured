@@ -21,6 +21,11 @@ public class OAuth2 {
 		String response= given()
 			.filter(sf)
 			.relaxedHTTPSValidation()
+			/**client grant, aAuthorization Code
+			PKCE
+			Client Credentials
+			Device Code
+			Refresh Token**/
 			.formParam("client_id","692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com")
 			.formParam("client_secret","erZOWM9g3UtwNRj340YYaK_W")
 			.formParam("grant_type","client_credentials")
@@ -37,6 +42,8 @@ public class OAuth2 {
 		String token=js.get("access_token");
 		System.out.println(token+" This is my access token");
 		
+		
+		//access resources throug accesstoken
 		given()
 			.filter(sf)	
 			.queryParam("access_token", token)

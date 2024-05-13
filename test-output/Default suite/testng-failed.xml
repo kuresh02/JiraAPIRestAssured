@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.testingapi.demo.working.JiraApi">
+      <class name="com.testingapi.demo.pojo.SerializationDeselialization">
         <methods>
-          <include name="jiraApilogin"/>
+          <include name="TestPojo"/>
         </methods>
-      </class> <!-- com.testingapi.demo.working.JiraApi -->
+      </class> <!-- com.testingapi.demo.pojo.SerializationDeselialization -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
