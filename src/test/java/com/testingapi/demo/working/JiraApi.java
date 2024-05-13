@@ -1,5 +1,6 @@
 package com.testingapi.demo.working;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.testingapi.demo.data.reusablejsonpath;
@@ -143,7 +144,33 @@ public class JiraApi {
 			.post("/rest/api/2/issue/{key}/attachments")
 		.then()
 			.log().all().assertThat().statusCode(200);
+		System.out.println("----------ooooooooo---------");
 		
+		String expected ="This is my 3rd and final comment";
 		
+		String response3 = given()	
+			.filter(session)
+			.pathParam("issueid", 10014)  //10101
+			.queryParam("fields", "comment")
+			.log().all()
+		.when()
+			.get("/rest/agile/1.0/issue/{issueid}")
+		.then()
+			.log().all()
+			.assertThat().statusCode(200)
+			.extract().response().asString();
+		JsonPath js4 = reusablejsonpath.rawtoJson(response3);
+		String actualid = js4.get("id");
+		int arraysize = js4.getInt("fields.comment.comments.size()  ");
+		for(int i=0;i<arraysize;i++) {
+			String  commentids= js4.get("fields.comment.comments["+i+"].id");
+			System.out.println(commentids);
+			if(commentids.equalsIgnoreCase("10106")) {
+				String msg=js4.getString("fields.comment.comments["+i+"].body");
+					
+					Assert.assertEquals(msg, expected);
+				
+			}
+		}
 	}
 }

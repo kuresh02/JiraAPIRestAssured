@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-12T21:41:50 IST" name="Default suite" finished-at="2024-05-12T21:41:56 IST" duration-ms="5256">
+  <suite started-at="2024-05-13T21:42:19 IST" name="Default suite" finished-at="2024-05-13T21:42:22 IST" duration-ms="2770">
     <groups>
     </groups>
-    <test started-at="2024-05-12T21:41:50 IST" name="Default test" finished-at="2024-05-12T21:41:56 IST" duration-ms="5256">
-      <class name="com.testingapi.demo.working.JiraApi">
-        <test-method signature="jiraApilogin()[pri:0, instance:com.testingapi.demo.working.JiraApi@5ab956d7]" started-at="2024-05-12T21:41:50 IST" name="jiraApilogin" finished-at="2024-05-12T21:41:56 IST" duration-ms="5199" status="PASS">
+    <test started-at="2024-05-13T21:42:19 IST" name="Default test" finished-at="2024-05-13T21:42:22 IST" duration-ms="2770">
+      <class name="com.testingapi.demo.working.OAuth2">
+        <test-method signature="oAuthCheck()[pri:0, instance:com.testingapi.demo.working.OAuth2@2892d68]" started-at="2024-05-13T21:42:19 IST" name="oAuthCheck" finished-at="2024-05-13T21:42:22 IST" duration-ms="2710" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- jiraApilogin -->
-      </class> <!-- com.testingapi.demo.working.JiraApi -->
+        </test-method> <!-- oAuthCheck -->
+      </class> <!-- com.testingapi.demo.working.OAuth2 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
