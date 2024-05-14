@@ -18,7 +18,11 @@ import io.restassured.filter.session.SessionFilter;
 import io.restassured.parsing.Parser;
 import io.restassured.path.json.JsonPath;
 
-public class SerializationDeselialization {
+public class Deselialization {
+	//Deselialization is nothing but to convert a json file to java object  format
+	//for the earch nested json and array object we need to create seprate class and also create pojo class.
+	//make sure each method in pojo class return proper value
+	
 	@Test
 		public static void TestPojo() {
 		
@@ -76,7 +80,7 @@ public class SerializationDeselialization {
 					.queryParams("access_token", token)
 					.expect().defaultParser(Parser.JSON)
 				.when()
-				.get("https://rahulshettyacademy.com/oauthapi/getCourseDetails").as(DataDetails.class);// return type is call type
+				.get("https://rahulshettyacademy.com/oauthapi/getCourseDetails").as(DataDetails.class);// return type is class type
 				System.out.println(dd.getInstructor());
 				// fetching the course
 				int sz=dd.getCourses().getWebAutomation().size();

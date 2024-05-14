@@ -3,6 +3,14 @@ package com.testingapi.demo.pojo;
 import java.util.List;
 
 public class SlClass {
+	private Location location;
+	private int accuracy;
+	private String name;
+	private String phone_number;
+	private String address;
+	private List<String> types;
+	private String website;
+	private String language;
 	public Location getLocation() {
 		return location;
 	}
@@ -51,12 +59,5 @@ public class SlClass {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	private Location location;
-	private int accuracy;
-	private String name;
-	private String phone_number;
-	private String address;
-	private List<String> types;
-	private String website;
-	private String language;
+	
 }
