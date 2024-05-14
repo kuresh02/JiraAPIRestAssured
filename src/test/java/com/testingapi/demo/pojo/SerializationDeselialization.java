@@ -3,6 +3,12 @@ import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
+import java.util.ArrayList;
+import java.util.*;
+
+import org.apache.commons.math3.analysis.function.Add;
+import org.apache.xmlbeans.impl.xb.xsdschema.ListDocument.List;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.testingapi.demo.data.reusablejsonpath;
@@ -55,7 +61,7 @@ public class SerializationDeselialization {
 				.log().all().extract().response().asString();
 			
 //			DataDetails dd= given()
-//					.relaxedHTTPSValidation()
+//					
 //					.filter(sf)
 //					.queryParam("access_token", token).expect().defaultParser(Parser.JSON)
 //					
@@ -64,12 +70,36 @@ public class SerializationDeselialization {
 //						.as(DataDetails.class);
 //			
 //			System.out.println(dd.getCourses());
-//				
+//			
+			String[] al= {"Selenium Webdriver Java","Cypress","Protractor"};
 			DataDetails dd=	given()
 					.queryParams("access_token", token)
-					.when().log().all()
-					.get("https://rahulshettyacademy.com/oauthapi/getCourseDetails").as(DataDetails.class);
-			System.out.println(dd.getInstructor());
+					.expect().defaultParser(Parser.JSON)
+				.when()
+				.get("https://rahulshettyacademy.com/oauthapi/getCourseDetails").as(DataDetails.class);// return type is call type
+				System.out.println(dd.getInstructor());
+				// fetching the course
+				int sz=dd.getCourses().getWebAutomation().size();
+				int sum =0;
+				ArrayList<String> a =new ArrayList<String>();
+				for(int i=0;i<sz;i++) {
+					String title =dd.getCourses().getWebAutomation().get(i).getCourseTitle();
+					System.out.println("The "+i+" st/nd/rd course title is "+ title);
+					String price =dd.getCourses().getWebAutomation().get(i).getPrice();
+					System.out.println("The course title is "+ price);
+					sum=sum+Integer.valueOf(price);
+					a.add(title);
+				
+				}
+				System.out.println("The course price is "+ sum);
+				Assert.assertEquals(sum, 130);
+				System.out.println("The api call is successful");
+				java.util.List<String> nl = Arrays.asList(al);
+				System.out.println(a+"========="+nl);
+				Assert.assertEquals(a, nl);
+				System.out.println("done========");
+				
+				
 		}
 	
 }
