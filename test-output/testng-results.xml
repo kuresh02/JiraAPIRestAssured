@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-05-14T23:14:34 IST" name="Default suite" finished-at="2024-05-14T23:14:36 IST" duration-ms="2200">
+  <suite started-at="2024-07-01T12:04:17 IST" name="Default suite" finished-at="2024-07-01T12:04:19 IST" duration-ms="2538">
     <groups>
     </groups>
-    <test started-at="2024-05-14T23:14:34 IST" name="Default test" finished-at="2024-05-14T23:14:36 IST" duration-ms="2200">
-      <class name="com.testingapi.demo.pojo.Serialization">
-        <test-method signature="serializeTest()[pri:0, instance:com.testingapi.demo.pojo.Serialization@738dc9b]" started-at="2024-05-14T23:14:34 IST" name="serializeTest" finished-at="2024-05-14T23:14:36 IST" duration-ms="2146" status="PASS">
+    <test started-at="2024-07-01T12:04:17 IST" name="Default test" finished-at="2024-07-01T12:04:19 IST" duration-ms="2538">
+      <class name="com.testingapi.demo.TestingEcom">
+        <test-method signature="testingEcom()[pri:0, instance:com.testingapi.demo.TestingEcom@738dc9b]" started-at="2024-07-01T12:04:17 IST" name="testingEcom" finished-at="2024-07-01T12:04:19 IST" duration-ms="2482" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- serializeTest -->
-      </class> <!-- com.testingapi.demo.pojo.Serialization -->
+        </test-method> <!-- testingEcom -->
+      </class> <!-- com.testingapi.demo.TestingEcom -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
